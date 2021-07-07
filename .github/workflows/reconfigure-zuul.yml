@@ -1,0 +1,31 @@
+---
+name: Reconfigure Zuul
+
+"on":
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  reconfigure-zuul:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --use-feature=2020-resolver --upgrade pip
+          python3 -m pip install --use-feature=2020-resolver ansible~=2.10.0
+          ansible-galaxy collection install community.docker
+
+      # Note that this will only do a reconfigure and will NOT re-deploy any pem files
+      - name: Run ansible
+        run: ansible-playbook main.yaml --extra-vars "webhook_token=${{ secrets.WEBHOOK_TOKEN }} db_user_pass=${{ secrets.DB_USER_PASS }} rd_root_pass=${{ secrets.DB_ROOT_PASS }}"
+        working-directory: ./ansible
