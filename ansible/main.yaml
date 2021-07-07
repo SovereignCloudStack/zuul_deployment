@@ -65,7 +65,7 @@
             baseurl: https://opendev.org
         tenants:
           - tenant:
-              name: Sovereign Cloud Stack (SCS)
+              name: SovereignCloudStack
               source:
                 opendevorg:
                   untrusted-projects:

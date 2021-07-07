@@ -11,8 +11,7 @@
     path: "{{ base_conf_dir }}"
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
-    mode: 0700
-  become: true
+    mode: 0744
 
 - name: create component config directories
   file:
@@ -21,7 +20,6 @@
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
     mode: 0744
-  become: true
   loop: "{{ component_conf_dirs | dict2items }}"
 
 - name: include copy tasks

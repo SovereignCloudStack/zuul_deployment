@@ -1,18 +1,10 @@
 ---
 - name: copy pem files (e.g. for github)
   synchronize:
-    src: pem-files/
+    src: "{{ playbook_dir }}/pem-files/"
     dest: "{{ component_conf_dirs.zuul }}/pem-files"
     owner: false
     group: false
-
-- name: copy pem files - ensure protection
-  file:
-    path: "{{ component_conf_dirs.zuul }}/pem-files"
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
-    recurse: true
-    mode: a+rX
 
 - name: copy zookeeper certificate generator script
   copy:

@@ -38,7 +38,7 @@ connections:
 
 tenants:
   - tenant:
-      name: my-tenant-name
+      name: my-tenant-name  # only use names that can be processed by urls.
       source:
         opendevorg:
           untrusted-projects:

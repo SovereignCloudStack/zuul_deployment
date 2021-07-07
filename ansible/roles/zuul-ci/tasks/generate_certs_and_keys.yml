@@ -23,10 +23,10 @@
   args:
     creates: "{{ component_conf_dirs.certs }}/certs"
 
-- name: ensure cert protection
+- name: ensure correct permission settings
   file:
-    path: "{{ component_conf_dirs.certs }}"
+    path: "{{ base_conf_dir }}"
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
+    mode: u=rwX,g=rX,o=rX
     recurse: true
-    mode: a+rX
