@@ -13,6 +13,8 @@ you'll find a single role. From there, go to
 vars.tenants[0].tenant.source.scszuulapp.untrusted-projects
 ```
 and add your repository in here. Preferably in alphabetical order.
+Once the PR is approved, the zuul-scheduler container needs to be restarted.
+This is done per schedule every day at 07:00 UTC or on request.
 
 
 ## Setup

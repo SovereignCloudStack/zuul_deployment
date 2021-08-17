@@ -38,6 +38,7 @@
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
     mode: 0644
+  notify: smart_reload_scheduler
 
 - name: template nodepool-launcher nodepool.yaml
   template:
