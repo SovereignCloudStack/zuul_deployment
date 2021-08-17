@@ -1,0 +1,25 @@
+---
+name: Restart Zuul Scheduler
+
+"on":
+  schedule:
+    - cron: 0 7 * * *
+  workflow_dispatch:
+
+jobs:
+  restart-scheduler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare SSH key
+        run: |
+          mkdir ~/.ssh
+          echo '${{ secrets.SSH_KEY }}' > ~/.ssh/id_rsa
+          chmod 0600 ~/.ssh/id_rsa
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Restart zuul scheduler
+        run: ssh -oStrictHostKeyChecking=no ubuntu@$(cat inventory.ini) docker restart zuul_scheduler
+        working-directory: ./ansible
+
