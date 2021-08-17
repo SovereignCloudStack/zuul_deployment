@@ -29,3 +29,6 @@ jobs:
       - name: Run ansible
         run: ansible-playbook main.yaml --extra-vars "webhook_token=${{ secrets.WEBHOOK_TOKEN }} db_user_pass=${{ secrets.DB_USER_PASS }} rd_root_pass=${{ secrets.DB_ROOT_PASS }}"
         working-directory: ./ansible
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+
