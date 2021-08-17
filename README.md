@@ -4,6 +4,22 @@ This repository contains the SCS Zuul-CI installation setup.
 Zuul-CI is a gating system which goes beyond normal CI-CD pipeline functionality.
 
 
+## How to add a repository
+
+If you want to add your SCS repository to zuul, you also have to create a PR in here.
+The file to touch is *ansible/main.yml*. In the playbooks **role** section
+you'll find a single role. From there, go to
+```yaml
+vars.tenants[0].tenant.source.scszuulapp.untrusted-projects
+```
+and add your repository in here. Preferably in alphabetical order.
+
+
+## Setup
+
+Installation steps
+
+
 ### Github App
 
 In oder to have Zuul-CI working with GitHub you need to setup a GitHub app.
@@ -20,14 +36,16 @@ cd terraform
 terraform apply -auto-approve
 ```
 
+
 ### Provisioning
 
-Done via Ansible.
+Done via Ansible. Automatically performed on changes in main branch.
 ```bash
 cd ansible
 ansible-playbook --extra-vars "webhook_token=webhooksecretvalue db_user_pass=userpassword db_root_pass=rootpassword" main.yaml
 ```
 
-### License
+
+## License
 
 Apache License 2.0

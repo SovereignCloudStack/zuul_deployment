@@ -78,6 +78,7 @@
                         load-branch: main
                   untrusted-projects:
                     - SovereignCloudStack/github-permissions
+                    - SovereignCloudStack/zuul-sandbox
         database:
           user_name: zuul
           user_pass: "{{ db_user_pass }}"
